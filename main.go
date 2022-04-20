@@ -6,6 +6,8 @@ import (
 	"github.com/signintech/gopdf"
 )
 
+const defaultX = 10
+
 func main() {
 
 	pdf := gopdf.GoPdf{}
@@ -22,6 +24,15 @@ func main() {
 		log.Print(err.Error())
 		return
 	}
-	pdf.Cell(nil, "您好")
+
+	pdf.Cell(nil, "Hello, World")
+	lineBreak(&pdf)
+	pdf.Cell(nil, "Hello, World")
+
 	pdf.WritePdf("hello.pdf")
+}
+
+func lineBreak(pdf *gopdf.GoPdf) {
+	pdf.SetX(defaultX)
+	pdf.SetY(pdf.GetY() + pdf.GetY() + 10)
 }

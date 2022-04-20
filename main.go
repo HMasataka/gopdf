@@ -7,6 +7,10 @@ import (
 )
 
 const defaultX = 10
+const a4MaxWith = 2360
+
+// Reference gopdf.PageSizeA4
+var PageSizeA4 = gopdf.Rect{W: 595 - 20, H: 842 - 10}
 
 func main() {
 
@@ -19,15 +23,13 @@ func main() {
 		return
 	}
 
-	err = pdf.SetFont("BIZ", "", 14)
+	err = pdf.SetFont("BIZ", "", 12)
 	if err != nil {
 		log.Print(err.Error())
 		return
 	}
 
-	pdf.Cell(nil, "Hello, World")
-	lineBreak(&pdf)
-	pdf.Cell(nil, "Hello, World")
+	pdf.MultiCell(&PageSizeA4, "HHEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLWOOOOOOOOOOOOOOOOOLDHEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLWOOOOOOOOOOOOOOOOOLDEEEEEEEEEEEEEEEEEEELLLLLLLLLLLLLLLLLLWOOOOOOOOOOOOOOOOOLD")
 
 	pdf.WritePdf("hello.pdf")
 }
